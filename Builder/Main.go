@@ -10,13 +10,13 @@ import (
 func startMain(opt string) {
 	if opt == "plain" {
 		builderObj := builder.TextBuilder{}
-		director := builder.Director{&builderObj}
+		director := builder.Director{Builder: &builderObj}
 		director.Construct()
 		result := builderObj.GetResult()
 		fmt.Println(result)
 	} else if opt == "html" {
 		builderObj := builder.HTMLBuilder{}
-		director := builder.Director{&builderObj}
+		director := builder.Director{Builder: &builderObj}
 		director.Construct()
 		result := builderObj.GetResult()
 		fmt.Printf("[%s] was created.\n", result)
