@@ -5,7 +5,7 @@ import (
 )
 
 func startMain() {
-	p := &adapter.PrintBanner{String: "Hello"}
+	p := adapter.NewPrintBanner("Hello")
 	p.PrintWeak()
 	p.PrintString()
 
