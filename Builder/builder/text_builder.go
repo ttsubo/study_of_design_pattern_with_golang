@@ -7,6 +7,11 @@ type TextBuilder struct {
 	buffer string
 }
 
+// NewTextBuilder func for initializing TextBuilder
+func NewTextBuilder() *TextBuilder {
+	return &TextBuilder{}
+}
+
 func (t *TextBuilder) makeTitle(title string) {
 	t.buffer += "======================\n"
 	t.buffer += fmt.Sprintf("# %s\n", title)

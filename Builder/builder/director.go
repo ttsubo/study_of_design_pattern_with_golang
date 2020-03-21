@@ -2,15 +2,22 @@ package builder
 
 // Director is struct
 type Director struct {
-	Builder builderInterface
+	builder builder
+}
+
+// NewDirector func for initializing Director
+func NewDirector(builder builder) *Director {
+	return &Director{
+		builder: builder,
+	}
 }
 
 // Construct func for conducting some methods of builder
 func (d *Director) Construct() {
-	d.Builder.makeTitle("Greeting")
-	d.Builder.makeString("From the morning to the afternoon")
-	d.Builder.makeItems([]string{"Good morning", "Hello"})
-	d.Builder.makeString("In the evening")
-	d.Builder.makeItems([]string{"Good evening", "Good night", "Good bye"})
-	d.Builder.close()
+	d.builder.makeTitle("Greeting")
+	d.builder.makeString("From the morning to the afternoon")
+	d.builder.makeItems([]string{"Good morning", "Hello"})
+	d.builder.makeString("In the evening")
+	d.builder.makeItems([]string{"Good evening", "Good night", "Good bye"})
+	d.builder.close()
 }

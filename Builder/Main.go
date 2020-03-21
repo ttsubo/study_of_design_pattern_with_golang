@@ -9,14 +9,14 @@ import (
 
 func startMain(opt string) {
 	if opt == "plain" {
-		builderObj := builder.TextBuilder{}
-		director := builder.Director{Builder: &builderObj}
+		builderObj := builder.NewTextBuilder()
+		director := builder.NewDirector(builderObj)
 		director.Construct()
 		result := builderObj.GetResult()
 		fmt.Println(result)
 	} else if opt == "html" {
-		builderObj := builder.HTMLBuilder{}
-		director := builder.Director{Builder: &builderObj}
+		builderObj := builder.NewHTMLBuilder()
+		director := builder.NewDirector(builderObj)
 		director.Construct()
 		result := builderObj.GetResult()
 		fmt.Printf("[%s] was created.\n", result)

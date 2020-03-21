@@ -12,6 +12,11 @@ type HTMLBuilder struct {
 	makeTitleCalled  bool
 }
 
+// NewHTMLBuilder func for initializing HTMLBuilder
+func NewHTMLBuilder() *HTMLBuilder {
+	return &HTMLBuilder{}
+}
+
 func (h *HTMLBuilder) makeTitle(title string) {
 	h.filename = fmt.Sprintf("%s.html", title)
 	h.f, _ = os.Create(h.filename)
