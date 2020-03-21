@@ -7,31 +7,34 @@ type ListFactory struct {
 }
 
 // CreateLink func for creating Link
-func (lf *ListFactory) CreateLink(caption, url string) LinkInterface {
-	listlink := ListLink{}
-	listlink.caption = caption
-	listlink.url = url
-	return &listlink
+func (lf *ListFactory) CreateLink(caption, url string) ItemInterface {
+	return newListLink(caption, url)
 }
 
 // CreateTray func for creating Tray
 func (lf *ListFactory) CreateTray(caption string) TrayInterface {
-	listTray := ListTray{}
-	listTray.caption = caption
-	return &listTray
+	return newListTray(caption)
 }
 
 // CreatePage func for creating page
 func (lf *ListFactory) CreatePage(title, author string) PageInterface {
-	listPage := ListPage{}
-	listPage.title = title
-	listPage.author = author
-	return &listPage
+	return newListPage(title, author)
 }
 
 // ListLink is struct
 type ListLink struct {
-	Link
+	*Link
+}
+
+func newListLink(caption, url string) *ListLink {
+	return &ListLink{
+		Link: &Link{
+			Item: &Item{
+				caption: caption,
+			},
+			url: url,
+		},
+	}
 }
 
 func (ll *ListLink) makeHTML() string {
@@ -40,7 +43,17 @@ func (ll *ListLink) makeHTML() string {
 
 // ListTray is struct
 type ListTray struct {
-	Tray
+	*Tray
+}
+
+func newListTray(caption string) *ListTray {
+	return &ListTray{
+		Tray: &Tray{
+			Item: &Item{
+				caption: caption,
+			},
+		},
+	}
 }
 
 func (lt *ListTray) makeHTML() string {
@@ -57,7 +70,16 @@ func (lt *ListTray) makeHTML() string {
 
 // ListPage is struct
 type ListPage struct {
-	Page
+	*Page
+}
+
+func newListPage(title, author string) *ListPage {
+	return &ListPage{
+		Page: &Page{
+			title:  title,
+			author: author,
+		},
+	}
 }
 
 func (lp *ListPage) makeHTML() string {

@@ -7,31 +7,34 @@ type TableFactory struct {
 }
 
 // CreateLink func for creating Link
-func (tf *TableFactory) CreateLink(caption, url string) LinkInterface {
-	tablelink := TableLink{}
-	tablelink.caption = caption
-	tablelink.url = url
-	return &tablelink
+func (tf *TableFactory) CreateLink(caption, url string) ItemInterface {
+	return newTableLink(caption, url)
 }
 
 // CreateTray func for creating Tray
 func (tf *TableFactory) CreateTray(caption string) TrayInterface {
-	tableTray := TableTray{}
-	tableTray.caption = caption
-	return &tableTray
+	return newTableTray(caption)
 }
 
 // CreatePage func for creating page
 func (tf *TableFactory) CreatePage(title, author string) PageInterface {
-	tablePage := TablePage{}
-	tablePage.title = title
-	tablePage.author = author
-	return &tablePage
+	return newTablePage(title, author)
 }
 
 // TableLink is struct
 type TableLink struct {
-	Link
+	*Link
+}
+
+func newTableLink(caption, url string) *TableLink {
+	return &TableLink{
+		Link: &Link{
+			Item: &Item{
+				caption: caption,
+			},
+			url: url,
+		},
+	}
 }
 
 func (tl *TableLink) makeHTML() string {
@@ -40,7 +43,17 @@ func (tl *TableLink) makeHTML() string {
 
 // TableTray is struct
 type TableTray struct {
-	Tray
+	*Tray
+}
+
+func newTableTray(caption string) *TableTray {
+	return &TableTray{
+		Tray: &Tray{
+			Item: &Item{
+				caption: caption,
+			},
+		},
+	}
 }
 
 func (tt *TableTray) makeHTML() string {
@@ -59,7 +72,16 @@ func (tt *TableTray) makeHTML() string {
 
 // TablePage is struct
 type TablePage struct {
-	Page
+	*Page
+}
+
+func newTablePage(title, author string) *TablePage {
+	return &TablePage{
+		Page: &Page{
+			title:  title,
+			author: author,
+		},
+	}
 }
 
 func (tp *TablePage) makeHTML() string {

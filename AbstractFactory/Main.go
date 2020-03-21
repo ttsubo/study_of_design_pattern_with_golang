@@ -36,10 +36,8 @@ func startMain(factoryObject factory.Factory) {
 func main() {
 	flag.Parse()
 	if flag.Arg(0) == "ListFactory" {
-		plugin := factory.ListFactory{}
-		startMain(&plugin)
+		startMain(&factory.ListFactory{})
 	} else if flag.Arg(0) == "TableFactory" {
-		plugin := factory.TableFactory{}
-		startMain(&plugin)
+		startMain(&factory.TableFactory{})
 	}
 }
