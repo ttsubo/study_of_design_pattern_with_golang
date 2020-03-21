@@ -17,6 +17,14 @@ type WinningStrategy struct {
 	prevHand *Hand
 }
 
+// NewWinningStrategy func for initializing WinningStrategy
+func NewWinningStrategy() *WinningStrategy {
+	return &WinningStrategy{
+		won:      false,
+		prevHand: nil,
+	}
+}
+
 // NextHand func can handle result of preHand
 func (ws *WinningStrategy) NextHand() *Hand {
 	if !ws.won {
@@ -33,6 +41,13 @@ func (ws *WinningStrategy) study(win bool) {
 // CircularStrategy is struct
 type CircularStrategy struct {
 	hand int
+}
+
+// NewCircularStrategy func for initializing CircularStrategy
+func NewCircularStrategy() *CircularStrategy {
+	return &CircularStrategy{
+		hand: 0,
+	}
 }
 
 // NextHand func can handle result of each Hand

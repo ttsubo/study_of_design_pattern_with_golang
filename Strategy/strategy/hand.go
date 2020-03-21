@@ -2,9 +2,9 @@ package strategy
 
 // Const Value for HandGame
 const (
-	HandValueGUU = iota
-	HandValueCHO
-	HandValuePAA
+	handValueGUU = iota
+	handValueCHO
+	handValuePAA
 )
 
 //Hand is struct
@@ -16,9 +16,9 @@ var hands []*Hand
 
 func init() {
 	hands = []*Hand{
-		&Hand{HandValueGUU},
-		&Hand{HandValueCHO},
-		&Hand{HandValuePAA},
+		&Hand{handValueGUU},
+		&Hand{handValueCHO},
+		&Hand{handValuePAA},
 	}
 }
 

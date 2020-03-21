@@ -5,25 +5,33 @@ import "fmt"
 // Player is struct
 type Player struct {
 	Name                           string
-	PlayerStrategy                 Strategy
+	strategy                       Strategy
 	wincount, losecount, gamecount int
+}
+
+// NewPlayer func for initializing Player
+func NewPlayer(name string, strategy Strategy) *Player {
+	return &Player{
+		Name:     name,
+		strategy: strategy,
+	}
 }
 
 // NextHand func can handle result of preHand
 func (p *Player) NextHand() *Hand {
-	return p.PlayerStrategy.NextHand()
+	return p.strategy.NextHand()
 }
 
 // Win func can judge result as game win
 func (p *Player) Win() {
-	p.PlayerStrategy.study(true)
+	p.strategy.study(true)
 	p.wincount++
 	p.gamecount++
 }
 
 // Lose func can judge result as game lose
 func (p *Player) Lose() {
-	p.PlayerStrategy.study(false)
+	p.strategy.study(false)
 	p.losecount++
 	p.gamecount++
 }

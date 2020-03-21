@@ -6,9 +6,9 @@ import (
 	"./strategy"
 )
 
-func main() {
-	player1 := strategy.Player{Name: "Taro", PlayerStrategy: &strategy.WinningStrategy{}}
-	player2 := strategy.Player{Name: "Hana", PlayerStrategy: &strategy.CircularStrategy{}}
+func startMain() {
+	player1 := strategy.NewPlayer("Taro", strategy.NewWinningStrategy())
+	player2 := strategy.NewPlayer("Hana", strategy.NewCircularStrategy())
 
 	for i := 0; i < 10000; i++ {
 		hand1 := player1.NextHand()
@@ -29,6 +29,10 @@ func main() {
 	}
 
 	fmt.Println("Total Result:")
-	fmt.Printf("%s\n", player1.ToString())
-	fmt.Printf("%s\n", player2.ToString())
+	fmt.Println(player1.ToString())
+	fmt.Println(player2.ToString())
+}
+
+func main() {
+	startMain()
 }
