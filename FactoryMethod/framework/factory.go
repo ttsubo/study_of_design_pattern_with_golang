@@ -1,25 +1,26 @@
 package factoryMethod
 
-// Factory is struct
-type Factory struct {
-}
-
 // FactoryInterface is interface
 type FactoryInterface interface {
-	createProduct(owner string) ProductInterface
-	registerProduct(ProductInterface)
-	Create(factory FactoryInterface, owner string) ProductInterface
+	createProduct(owner string) Product
+	registerProduct(Product)
+	Create(owner string) Product
+}
+
+// Factory is struct
+type Factory struct {
+	factory FactoryInterface
 }
 
 // Create func for creating product
-func (f *Factory) Create(factory FactoryInterface, owner string) ProductInterface {
-	p := factory.createProduct(owner)
-	factory.registerProduct(p)
+func (f *Factory) Create(owner string) Product {
+	p := f.factory.createProduct(owner)
+	f.factory.registerProduct(p)
 	return p
 }
 
-// ProductInterface is interface
-type ProductInterface interface {
+// Product is interface
+type Product interface {
 	Use()
-	Owner() string
+	getOwner() string
 }

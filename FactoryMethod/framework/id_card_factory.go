@@ -4,30 +4,41 @@ import "fmt"
 
 // IDCardFactory is struct
 type IDCardFactory struct {
-	Factory
+	*Factory
 	owners []string
 }
 
-func (i *IDCardFactory) createProduct(owner string) ProductInterface {
-	fmt.Printf("I'll create %s's card\n", owner)
-	return &IDCardProduct{owner}
+// NewIDCardFactory func for initializing IDCardFactory
+func NewIDCardFactory() *IDCardFactory {
+	idCardFactory := &IDCardFactory{
+		Factory: &Factory{},
+	}
+	idCardFactory.factory = idCardFactory
+	return idCardFactory
 }
 
-func (i *IDCardFactory) registerProduct(product ProductInterface) {
-	i.owners = append(i.owners, product.Owner())
+func (i *IDCardFactory) createProduct(owner string) Product {
+	return newIDCardProduct(owner)
 }
 
-// IDCardProduct is struct
-type IDCardProduct struct {
+func (i *IDCardFactory) registerProduct(product Product) {
+	i.owners = append(i.owners, product.getOwner())
+}
+
+type iDCardProduct struct {
 	owner string
 }
 
+func newIDCardProduct(owner string) *iDCardProduct {
+	fmt.Printf("I'll create %s's card\n", owner)
+	return &iDCardProduct{owner}
+}
+
 // Use func for using card
-func (i *IDCardProduct) Use() {
+func (i *iDCardProduct) Use() {
 	fmt.Printf("I'll use %s's card\n", i.owner)
 }
 
-// Owner func for confirming owner
-func (i *IDCardProduct) Owner() string {
+func (i *iDCardProduct) getOwner() string {
 	return i.owner
 }

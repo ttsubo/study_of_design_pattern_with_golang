@@ -5,15 +5,14 @@ import (
 )
 
 func startMain(factoryObject factoryMethod.FactoryInterface) {
-	card1 := factoryObject.Create(factoryObject, "Hiroshi Yuki")
-	card2 := factoryObject.Create(factoryObject, "Tomura")
-	card3 := factoryObject.Create(factoryObject, "Hanako Sato")
+	card1 := factoryObject.Create("Hiroshi Yuki")
+	card2 := factoryObject.Create("Tomura")
+	card3 := factoryObject.Create("Hanako Sato")
 	card1.Use()
 	card2.Use()
 	card3.Use()
 }
 
 func main() {
-	factory := factoryMethod.IDCardFactory{}
-	startMain(&factory)
+	startMain(factoryMethod.NewIDCardFactory())
 }
