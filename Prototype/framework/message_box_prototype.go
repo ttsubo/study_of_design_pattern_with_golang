@@ -7,19 +7,27 @@ import (
 
 // MessageBox is struct
 type MessageBox struct {
-	Decochar string
+	decochar string
+}
+
+// NewMessageBox func for initializing MessageBox
+func NewMessageBox(decochar string) *MessageBox {
+	return &MessageBox{
+		decochar: decochar,
+	}
 }
 
 // Use func for confirming name
 func (m *MessageBox) Use(s string) {
 	length := len(s)
-	line := strings.Repeat(m.Decochar, (length + 4))
-	fmt.Printf("%s\n", line)
-	fmt.Printf("%s %s %s\n", m.Decochar, s, m.Decochar)
-	fmt.Printf("%s\n", line)
+	line := strings.Repeat(m.decochar, (length + 4))
+
+	fmt.Println(line)
+	fmt.Printf("%s %s %s\n", m.decochar, s, m.decochar)
+	fmt.Println(line)
 	fmt.Println("")
 }
 
 func (m *MessageBox) createClone() Prototype {
-	return &MessageBox{m.Decochar}
+	return NewMessageBox(m.decochar)
 }

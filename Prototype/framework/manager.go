@@ -11,11 +11,15 @@ type Manager struct {
 	showcase map[string]Prototype
 }
 
+// NewManager func for initializing Manager
+func NewManager() *Manager {
+	return &Manager{
+		showcase: make(map[string]Prototype),
+	}
+}
+
 // Register func for registering proto
 func (m *Manager) Register(name string, proto Prototype) {
-	if m.showcase == nil {
-		m.showcase = make(map[string]Prototype)
-	}
 	m.showcase[name] = proto
 }
 
