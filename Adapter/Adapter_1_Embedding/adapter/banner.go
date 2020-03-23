@@ -2,17 +2,14 @@ package adapter
 
 import "fmt"
 
-// Banner is struct
-type Banner struct {
-	String string
+type banner struct {
+	str string
 }
 
-// ShowWithParen func for displaying String with formatting paren
-func (b *Banner) ShowWithParen() {
-	fmt.Printf("(%s)\n", b.String)
+func (b *banner) showWithParen() {
+	fmt.Printf("(%s)\n", b.str)
 }
 
-// ShowWithAster func for displaying String with formatting aster
-func (b *Banner) ShowWithAster() {
-	fmt.Printf("*%s*\n", b.String)
+func (b *banner) showWithAster() {
+	fmt.Printf("*%s*\n", b.str)
 }

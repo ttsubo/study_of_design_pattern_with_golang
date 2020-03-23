@@ -5,9 +5,9 @@ import (
 )
 
 func startMain() {
-	p := &adapter.PrintBanner{String: "Hello"}
-	p.PrintWeak(p)
-	p.PrintString(p)
+	p := adapter.NewPrintBanner("Hello")
+	p.PrintWeak()
+	p.PrintString()
 }
 
 func main() {
