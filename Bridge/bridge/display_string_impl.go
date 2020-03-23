@@ -7,7 +7,16 @@ import (
 
 // DisplayStringImpl is struct
 type DisplayStringImpl struct {
-	String string
+	str   string
+	width int
+}
+
+// NewDisplayStringImpl func for initializing DisplayStringImpl
+func NewDisplayStringImpl(str string) *DisplayStringImpl {
+	return &DisplayStringImpl{
+		str:   str,
+		width: len(str),
+	}
 }
 
 func (d *DisplayStringImpl) rawOpen() {
@@ -15,7 +24,7 @@ func (d *DisplayStringImpl) rawOpen() {
 }
 
 func (d *DisplayStringImpl) rawPrint() {
-	fmt.Printf("|%s|\n", d.String)
+	fmt.Printf("|%s|\n", d.str)
 }
 
 func (d *DisplayStringImpl) rawClose() {
@@ -24,6 +33,6 @@ func (d *DisplayStringImpl) rawClose() {
 }
 
 func (d *DisplayStringImpl) printLine() {
-	line := strings.Repeat("-", len(d.String))
+	line := strings.Repeat("-", d.width)
 	fmt.Printf("+%s+\n", line)
 }

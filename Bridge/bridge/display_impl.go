@@ -1,6 +1,6 @@
 package bridge
 
-type displayImplInterface interface {
+type displayImpl interface {
 	rawOpen()
 	rawPrint()
 	rawClose()

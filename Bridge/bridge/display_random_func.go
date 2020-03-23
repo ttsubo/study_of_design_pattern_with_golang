@@ -7,19 +7,16 @@ import (
 
 // DisplayRandomFunc is struct
 type DisplayRandomFunc struct {
-	Impl displayImplInterface
+	*DisplayFunc
 }
 
-func (d *DisplayRandomFunc) open() {
-	d.Impl.rawOpen()
-}
-
-func (d *DisplayRandomFunc) printBody() {
-	d.Impl.rawPrint()
-}
-
-func (d *DisplayRandomFunc) close() {
-	d.Impl.rawClose()
+// NewDisplayRandomFunc func for initializing DisplayRandomFunc
+func NewDisplayRandomFunc(impl displayImpl) *DisplayRandomFunc {
+	return &DisplayRandomFunc{
+		DisplayFunc: &DisplayFunc{
+			impl: impl,
+		},
+	}
 }
 
 //RandomDisplay  func for displaying string

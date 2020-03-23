@@ -2,19 +2,26 @@ package bridge
 
 // DisplayFunc is struct
 type DisplayFunc struct {
-	Impl displayImplInterface
+	impl displayImpl
 }
 
-func (d DisplayFunc) open() {
-	d.Impl.rawOpen()
+// NewDisplayFunc func for initializing DisplayFunc
+func NewDisplayFunc(impl displayImpl) *DisplayFunc {
+	return &DisplayFunc{
+		impl: impl,
+	}
 }
 
-func (d DisplayFunc) printBody() {
-	d.Impl.rawPrint()
+func (d *DisplayFunc) open() {
+	d.impl.rawOpen()
 }
 
-func (d DisplayFunc) close() {
-	d.Impl.rawClose()
+func (d *DisplayFunc) printBody() {
+	d.impl.rawPrint()
+}
+
+func (d *DisplayFunc) close() {
+	d.impl.rawClose()
 }
 
 //Display  func for displaying string

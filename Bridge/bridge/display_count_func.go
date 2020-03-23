@@ -2,26 +2,16 @@ package bridge
 
 // DisplayCountFunc is struct
 type DisplayCountFunc struct {
-	Impl displayImplInterface
+	*DisplayFunc
 }
 
-func (d *DisplayCountFunc) open() {
-	d.Impl.rawOpen()
-}
-
-func (d *DisplayCountFunc) printBody() {
-	d.Impl.rawPrint()
-}
-
-func (d *DisplayCountFunc) close() {
-	d.Impl.rawClose()
-}
-
-//Display  func for displaying string
-func (d *DisplayCountFunc) Display() {
-	d.open()
-	d.printBody()
-	d.close()
+// NewDisplayCountFunc func for initializing DisplayCountFunc
+func NewDisplayCountFunc(impl displayImpl) *DisplayCountFunc {
+	return &DisplayCountFunc{
+		DisplayFunc: &DisplayFunc{
+			impl: impl,
+		},
+	}
 }
 
 //MultiDisplay  func for displaying string

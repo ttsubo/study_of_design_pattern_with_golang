@@ -7,21 +7,29 @@ import (
 
 // DisplayTextfileImpl is struct
 type DisplayTextfileImpl struct {
-	FileName string
-	fp       *os.File
+	fileName string
+	f        *os.File
+}
+
+// NewDisplayTextfileImpl func for initializing DisplayTextfileImpl
+func NewDisplayTextfileImpl(str string) *DisplayTextfileImpl {
+	return &DisplayTextfileImpl{
+		fileName: str,
+	}
 }
 
 func (d *DisplayTextfileImpl) rawOpen() {
-	f, err := os.Open(d.FileName)
-	d.fp = f
+	fp, err := os.Open(d.fileName)
 	if err != nil {
 		panic(err)
+	} else {
+		d.f = fp
 	}
 }
 
 func (d *DisplayTextfileImpl) rawPrint() {
 	buf := make([]byte, 64)
-	_, err := d.fp.Read(buf)
+	_, err := d.f.Read(buf)
 	if err != nil {
 		panic(err)
 	}
@@ -29,5 +37,5 @@ func (d *DisplayTextfileImpl) rawPrint() {
 }
 
 func (d *DisplayTextfileImpl) rawClose() {
-	d.fp.Close()
+	d.f.Close()
 }
