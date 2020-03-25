@@ -2,30 +2,39 @@ package decorator
 
 import "fmt"
 
-// Display is struct
-type Display struct {
-}
-
-// DisplayInterface is interface
-type DisplayInterface interface {
+type displayInterface interface {
 	getColumns() int
 	getRows() int
 	getRowText(row int) string
 }
 
+type display struct {
+	myDisplay displayInterface
+}
+
 // Show func for printing something
-func (d *Display) Show(display DisplayInterface) {
+func (d *display) Show() {
 	str := ""
-	for i := 0; i < display.getRows(); i++ {
-		str += display.getRowText(i) + "\n"
+	for i := 0; i < d.myDisplay.getRows(); i++ {
+		str += d.myDisplay.getRowText(i) + "\n"
 	}
 	fmt.Printf("%s", str)
 }
 
 // StringDisplay is struct
 type StringDisplay struct {
-	*Display
+	*display
 	String string
+}
+
+// NewStringDisplay func for initalizing StringDisplay
+func NewStringDisplay(str string) *StringDisplay {
+	stringDisplay := &StringDisplay{
+		display: &display{},
+		String:  str,
+	}
+	stringDisplay.myDisplay = stringDisplay
+	return stringDisplay
 }
 
 func (s *StringDisplay) getColumns() int {
@@ -41,12 +50,4 @@ func (s *StringDisplay) getRowText(row int) string {
 		return s.String
 	}
 	return ""
-}
-
-// NewStringDisplay func for initalizing StringDisplay
-func NewStringDisplay(str string) *StringDisplay {
-	return &StringDisplay{
-		Display: &Display{},
-		String:  str,
-	}
 }

@@ -10,9 +10,9 @@ func startMain() {
 	b1 := decorator.NewStringDisplay("Hello, world.")
 	b2 := decorator.NewSideBorder(b1, "#")
 	b3 := decorator.NewFullBorder(b2)
-	b1.Show(b1)
-	b2.Show(b2)
-	b3.Show(b3)
+	b1.Show()
+	b2.Show()
+	b3.Show()
 	fmt.Println("")
 	b4 := decorator.NewSideBorder(
 		decorator.NewFullBorder(
@@ -27,7 +27,7 @@ func startMain() {
 		),
 		"/",
 	)
-	b4.Show(b4)
+	b4.Show()
 }
 
 func main() {
