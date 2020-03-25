@@ -4,25 +4,31 @@ import "fmt"
 
 // Directory is sturct
 type Directory struct {
-	Name, path string
-	directory  []Entry
+	name      string
+	directory []entry
+}
+
+// NewDirectory func for initializing Directory
+func NewDirectory(name string) *Directory {
+	return &Directory{
+		name: name,
+	}
 }
 
 func (d *Directory) getName() string {
-	return d.Name
+	return d.name
 }
 
-// GetSize func for getting size
-func (d *Directory) GetSize() int {
+func (d *Directory) getSize() int {
 	size := 0
 	for _, entry := range d.directory {
-		size += entry.GetSize()
+		size += entry.getSize()
 	}
 	return size
 }
 
 // Add func for adding directory
-func (d *Directory) Add(entry Entry) {
+func (d *Directory) Add(entry entry) {
 	d.directory = append(d.directory, entry)
 }
 
@@ -30,10 +36,10 @@ func (d *Directory) Add(entry Entry) {
 func (d *Directory) PrintList(prefix string) {
 	d.print(prefix)
 	for _, e := range d.directory {
-		e.PrintList(prefix + "/" + d.Name)
+		e.PrintList(prefix + "/" + d.name)
 	}
 }
 
 func (d *Directory) print(prefix string) {
-	fmt.Printf("%s/%s (%d)\n", prefix, d.getName(), d.GetSize())
+	fmt.Printf("%s/%s (%d)\n", prefix, d.getName(), d.getSize())
 }

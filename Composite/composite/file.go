@@ -6,21 +6,28 @@ import (
 
 // File is sturct
 type File struct {
-	Name string
-	Size int
+	name string
+	size int
+}
+
+// NewFile func for initializing File
+func NewFile(name string, size int) *File {
+	return &File{
+		name: name,
+		size: size,
+	}
 }
 
 func (f *File) getName() string {
-	return f.Name
+	return f.name
 }
 
-// GetSize func for getting size
-func (f *File) GetSize() int {
-	return f.Size
+func (f *File) getSize() int {
+	return f.size
 }
 
 // Add func for adding file
-func (f *File) Add(entry Entry) {
+func (f *File) Add(entry entry) {
 	if err := doError(); err != nil {
 		fmt.Println(err)
 	}
@@ -32,7 +39,7 @@ func (f *File) PrintList(prefix string) {
 }
 
 func (f *File) print(prefix string) {
-	fmt.Printf("%s/%s (%d)\n", prefix, f.getName(), f.GetSize())
+	fmt.Printf("%s/%s (%d)\n", prefix, f.getName(), f.getSize())
 }
 
 func doError() error {

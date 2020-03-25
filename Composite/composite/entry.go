@@ -1,7 +1,6 @@
 package composite
 
-// Entry is interface
-type Entry interface {
+type entry interface {
 	PrintList(prefix string)
-	GetSize() int
+	getSize() int
 }
