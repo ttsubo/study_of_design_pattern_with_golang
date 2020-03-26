@@ -9,6 +9,9 @@ import (
 type PageMaker struct {
 }
 
+// Pagemaker is variable
+var Pagemaker = &PageMaker{}
+
 // MakeWelcomePage func for making welcome page
 func (p *PageMaker) MakeWelcomePage(mailaddr, filename string) {
 	username := ""

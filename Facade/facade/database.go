@@ -20,7 +20,6 @@ type Person struct {
 var maildata []Person
 
 func (d *Database) getProperties(dbname string) []Person {
-
 	filename := dbname + ".json"
 	jsonString, err := ioutil.ReadFile(filename)
 	if err != nil {
