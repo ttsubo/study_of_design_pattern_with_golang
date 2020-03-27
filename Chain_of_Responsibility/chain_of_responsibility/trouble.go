@@ -4,13 +4,20 @@ import "fmt"
 
 // Trouble is struct
 type Trouble struct {
-	Number int
+	number int
+}
+
+// NewTrouble func for initializing Trouble
+func NewTrouble(number int) *Trouble {
+	return &Trouble{
+		number: number,
+	}
 }
 
 func (t *Trouble) getNumber() int {
-	return t.Number
+	return t.number
 }
 
 func (t *Trouble) print() string {
-	return fmt.Sprintf("[Trouble %d]", t.Number)
+	return fmt.Sprintf("[Trouble %d]", t.number)
 }

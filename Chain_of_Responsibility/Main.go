@@ -12,16 +12,11 @@ func startMain() {
 	elmo := chainOfResponsibility.NewOddSupport("Elmo")
 	fred := chainOfResponsibility.NewLimitSupport("Fred", 300)
 
-	alice.SetNext(bob)
-	bob.SetNext(charlie)
-	charlie.SetNext(diana)
-	diana.SetNext(elmo)
-	elmo.SetNext(fred)
+	alice.SetNext(bob).SetNext(charlie).SetNext(diana).SetNext(elmo).SetNext(fred)
 
 	for i := 0; i < 500; i += 33 {
-		alice.Handle(alice, chainOfResponsibility.Trouble{Number: i})
+		alice.Handle(chainOfResponsibility.NewTrouble(i))
 	}
-
 }
 
 func main() {

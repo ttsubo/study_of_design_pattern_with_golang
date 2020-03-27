@@ -2,78 +2,87 @@ package chainOfResponsibility
 
 import "fmt"
 
-// SupportInterface is interface
-type SupportInterface interface {
-	resolve(trouble Trouble) bool
-	Handle(support SupportInterface, trouble Trouble)
+type supportInterface interface {
+	resolve(trouble *Trouble) bool
+	Handle(trouble *Trouble)
+	SetNext(next supportInterface) supportInterface
 }
 
-// Support is struct
-type Support struct {
-	Name string
-	next SupportInterface
+type support struct {
+	name string
+	own  supportInterface
+	next supportInterface
 }
 
 // SetNext func for relating to next Supporter
-func (s *Support) SetNext(next SupportInterface) {
+func (s *support) SetNext(next supportInterface) supportInterface {
 	s.next = next
+	return next
 }
 
 // Handle func for handling trouble
-func (s *Support) Handle(support SupportInterface, trouble Trouble) {
-	if support.resolve(trouble) {
+func (s *support) Handle(trouble *Trouble) {
+	if s.own.resolve(trouble) {
 		s.done(trouble)
 	} else if s.next != nil {
-		s.next.Handle(s.next, trouble)
+		s.next.Handle(trouble)
 	} else {
 		s.fail(trouble)
 	}
 }
 
-func (s *Support) print() string {
-	return fmt.Sprintf("[%s]", s.Name)
+func (s *support) print() string {
+	return fmt.Sprintf("[%s]", s.name)
 }
 
-func (s *Support) done(trouble Trouble) {
+func (s *support) done(trouble *Trouble) {
 	fmt.Printf("%s is resolved by %s.\n", trouble.print(), s.print())
 }
 
-func (s *Support) fail(trouble Trouble) {
+func (s *support) fail(trouble *Trouble) {
 	fmt.Printf("%s cannot be resolved.\n", trouble.print())
 }
 
 // NoSupport is struct
 type NoSupport struct {
-	*Support
-}
-
-func (n *NoSupport) resolve(trouble Trouble) bool {
-	return false
+	*support
 }
 
 // NewNoSupport func for initializing NoSupport
 func NewNoSupport(name string) *NoSupport {
-	return &NoSupport{
-		Support: &Support{Name: name},
+	noSupport := &NoSupport{
+		support: &support{
+			name: name,
+		},
 	}
+	noSupport.own = noSupport
+	return noSupport
+}
+
+func (n *NoSupport) resolve(trouble *Trouble) bool {
+	return false
 }
 
 // LimitSupport is struct
 type LimitSupport struct {
-	*Support
-	Limit int
+	*support
+	limit int
 }
 
 // NewLimitSupport func for initializing LimitSupport
 func NewLimitSupport(name string, limit int) *LimitSupport {
-	return &LimitSupport{
-		Support: &Support{Name: name},
-		Limit:   limit,
+	limitSupport := &LimitSupport{
+		support: &support{
+			name: name,
+		},
+		limit: limit,
 	}
+	limitSupport.own = limitSupport
+	return limitSupport
 }
 
-func (l *LimitSupport) resolve(trouble Trouble) bool {
-	if trouble.getNumber() < l.Limit {
+func (l *LimitSupport) resolve(trouble *Trouble) bool {
+	if trouble.getNumber() < l.limit {
 		return true
 	}
 	return false
@@ -81,17 +90,21 @@ func (l *LimitSupport) resolve(trouble Trouble) bool {
 
 // OddSupport is struct
 type OddSupport struct {
-	*Support
+	*support
 }
 
 // NewOddSupport func for initializing OddSupport
 func NewOddSupport(name string) *OddSupport {
-	return &OddSupport{
-		Support: &Support{Name: name},
+	oddSupport := &OddSupport{
+		support: &support{
+			name: name,
+		},
 	}
+	oddSupport.own = oddSupport
+	return oddSupport
 }
 
-func (o *OddSupport) resolve(trouble Trouble) bool {
+func (o *OddSupport) resolve(trouble *Trouble) bool {
 	if trouble.getNumber()%2 == 1 {
 		return true
 	}
@@ -100,20 +113,24 @@ func (o *OddSupport) resolve(trouble Trouble) bool {
 
 // SpecialSupport is struct
 type SpecialSupport struct {
-	*Support
-	Number int
+	*support
+	number int
 }
 
 // NewSpecialSupport func for initializing SpecialSupport
 func NewSpecialSupport(name string, number int) *SpecialSupport {
-	return &SpecialSupport{
-		Support: &Support{Name: name},
-		Number:  number,
+	specialSupport := &SpecialSupport{
+		support: &support{
+			name: name,
+		},
+		number: number,
 	}
+	specialSupport.own = specialSupport
+	return specialSupport
 }
 
-func (s *SpecialSupport) resolve(trouble Trouble) bool {
-	if trouble.getNumber() == s.Number {
+func (s *SpecialSupport) resolve(trouble *Trouble) bool {
+	if trouble.getNumber() == s.number {
 		return true
 	}
 	return false
