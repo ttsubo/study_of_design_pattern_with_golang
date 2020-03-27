@@ -15,6 +15,5 @@ func startMain(p proxy.Printable) {
 }
 
 func main() {
-	p := proxy.PrinterProxy{Name: "Alice"}
-	startMain(&p)
+	startMain(proxy.NewPrinterProxy("Alice"))
 }

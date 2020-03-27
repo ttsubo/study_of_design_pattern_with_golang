@@ -5,7 +5,7 @@ import (
 	"time"
 )
 
-// Printable in interface
+// Printable is inteface
 type Printable interface {
 	SetPrinterName(name string)
 	GetPrinterName() string
@@ -58,21 +58,28 @@ func (p *printer) heavyJob(msg string) {
 
 // PrinterProxy is struct
 type PrinterProxy struct {
-	Name, real string
+	name, real string
+}
+
+// NewPrinterProxy func for initializing PrinterProxy
+func NewPrinterProxy(name string) *PrinterProxy {
+	return &PrinterProxy{
+		name: name,
+	}
 }
 
 // SetPrinterName func for setting name in printer
 func (p *PrinterProxy) SetPrinterName(name string) {
-	p.Name = name
+	p.name = name
 }
 
 // GetPrinterName func for fetching name
 func (p *PrinterProxy) GetPrinterName() string {
-	return p.Name
+	return p.name
 }
 
 // MyPrint func for printing something
 func (p *PrinterProxy) MyPrint(str string) {
-	real := getPrinter(p.Name)
+	real := getPrinter(p.name)
 	real.MyPrint(str)
 }
