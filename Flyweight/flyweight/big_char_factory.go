@@ -9,20 +9,24 @@ type bigCharFactory struct {
 	pool map[string]*bigChar
 }
 
+func newBigCharFactory() *bigCharFactory {
+	bigChrFct := &bigCharFactory{
+		pool: make(map[string]*bigChar),
+	}
+	return bigChrFct
+}
+
 var instance *bigCharFactory
 
 func getInstance() *bigCharFactory {
 	if instance == nil {
-		instance = &bigCharFactory{}
+		instance = newBigCharFactory()
 	}
 	return instance
 }
 
 func (b *bigCharFactory) getBigChar(charname string) *bigChar {
 	var bc *bigChar
-	if b.pool == nil {
-		b.pool = make(map[string]*bigChar)
-	}
 	if _, ok := b.pool[charname]; !ok {
 		bc = newBigChar(charname)
 		b.pool[charname] = bc
@@ -55,12 +59,11 @@ func (b *BigString) Print() {
 }
 
 type bigChar struct {
-	charname string
 	fontdata string
 }
 
 func newBigChar(charname string) *bigChar {
-	char := &bigChar{charname: charname}
+	char := &bigChar{}
 	data := make([]byte, 256)
 	f, err := os.Open(fmt.Sprintf("big%s.txt", charname))
 	if err == nil {

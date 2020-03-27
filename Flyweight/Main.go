@@ -9,7 +9,6 @@ import (
 func startMain(str string) {
 	bs := flyweight.NewBigString(str)
 	bs.Print()
-
 }
 
 func main() {
