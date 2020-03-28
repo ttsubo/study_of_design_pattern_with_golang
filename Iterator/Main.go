@@ -6,12 +6,11 @@ import (
 	"./iterator"
 )
 
-func startMain() {
-	bookShelf := iterator.NewBookShelf()
-	bookShelf.Append(&iterator.Book{Name: "Aroun d the World in 80 days"})
-	bookShelf.Append(&iterator.Book{Name: "Bible"})
-	bookShelf.Append(&iterator.Book{Name: "Cinderella"})
-	bookShelf.Append(&iterator.Book{Name: "Daddy-Long-Legs"})
+func startMain(bookShelf iterator.Aggregate) {
+	bookShelf.Append(iterator.NewBook("Aroun d the World in 80 days"))
+	bookShelf.Append(iterator.NewBook("Bible"))
+	bookShelf.Append(iterator.NewBook("Cinderella"))
+	bookShelf.Append(iterator.NewBook("Daddy-Long-Legs"))
 	it := bookShelf.Iterator()
 	for it.HasNext() {
 		book := it.Next()
@@ -20,5 +19,5 @@ func startMain() {
 }
 
 func main() {
-	startMain()
+	startMain(iterator.NewBookShelf())
 }
