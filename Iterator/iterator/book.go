@@ -2,12 +2,19 @@ package iterator
 
 // Book is struct
 type Book struct {
-	Name string
+	name string
+}
+
+// NewBook func for initializing Book
+func NewBook(name string) *Book {
+	return &Book{
+		name: name,
+	}
 }
 
 // GetName func for getting bookname
 func (b *Book) GetName() string {
-	return b.Name
+	return b.name
 }
 
 type bookShelfIterator struct {
