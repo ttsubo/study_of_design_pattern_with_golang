@@ -8,13 +8,12 @@ import (
 )
 
 func startMain(filename string, permission uint64) {
-	recv := &command.FileOperator{}
-	cc := &command.CompositeCommand{}
+	recv := command.NewFileOperator()
+	cc := command.NewCompositeCommand()
 	cc.AppendCmd(command.NewFileTouchCommand(filename, recv))
 	cc.AppendCmd(command.NewChmodCommand(filename, permission, recv))
 	cc.Execute()
 	cc.Display()
-
 }
 
 func main() {

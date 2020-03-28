@@ -14,6 +14,11 @@ type command interface {
 type FileOperator struct {
 }
 
+// NewFileOperator func for initializing FileOperator
+func NewFileOperator() *FileOperator {
+	return &FileOperator{}
+}
+
 func (f *FileOperator) createFile(filename string) {
 	os.Create(filename)
 }
@@ -25,6 +30,11 @@ func (f *FileOperator) changeFileMode(filename string, permission uint64) {
 // CompositeCommand is struct
 type CompositeCommand struct {
 	cmds []command
+}
+
+//NewCompositeCommand func for initializing CompositeCommand
+func NewCompositeCommand() *CompositeCommand {
+	return &CompositeCommand{}
 }
 
 // AppendCmd func for appending command
