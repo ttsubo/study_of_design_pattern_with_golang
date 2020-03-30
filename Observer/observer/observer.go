@@ -14,6 +14,11 @@ type Observer interface {
 type DigitObserver struct {
 }
 
+// NewDigitObserver func for initializing DigitObserver
+func NewDigitObserver() *DigitObserver {
+	return &DigitObserver{}
+}
+
 func (d *DigitObserver) update(generator *NumberGenerator) {
 	fmt.Printf("DigitObservser: %d\n", generator.getNumber())
 	time.Sleep(time.Millisecond * 100)
@@ -21,6 +26,11 @@ func (d *DigitObserver) update(generator *NumberGenerator) {
 
 // GraphObserver is struct
 type GraphObserver struct {
+}
+
+// NewGraphObserver func for initializing GraphObserver
+func NewGraphObserver() *GraphObserver {
+	return &GraphObserver{}
 }
 
 func (g *GraphObserver) update(generator *NumberGenerator) {
