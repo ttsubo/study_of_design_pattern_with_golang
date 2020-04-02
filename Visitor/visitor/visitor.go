@@ -2,6 +2,11 @@ package visitor
 
 import "fmt"
 
+// Visitor is interface
+type Visitor interface {
+	visit(directory Entry)
+}
+
 // ListVisitor is struct
 type ListVisitor struct {
 	currentdir string

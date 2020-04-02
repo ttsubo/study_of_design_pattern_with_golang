@@ -6,7 +6,7 @@ import "fmt"
 type Entry interface {
 	getName() string
 	getSize() int
-	Accept(v *ListVisitor)
+	Accept(v Visitor)
 	toString() string
 	getDir() []Entry
 }
@@ -42,7 +42,7 @@ func (f *File) Add(entry Entry) {
 }
 
 // Accept func for accepting something
-func (f *File) Accept(v *ListVisitor) {
+func (f *File) Accept(v Visitor) {
 	v.visit(f)
 }
 
@@ -81,7 +81,7 @@ func (d *Directory) Add(entry Entry) {
 }
 
 // Accept func for accepting something
-func (d *Directory) Accept(v *ListVisitor) {
+func (d *Directory) Accept(v Visitor) {
 	v.visit(d)
 }
 
