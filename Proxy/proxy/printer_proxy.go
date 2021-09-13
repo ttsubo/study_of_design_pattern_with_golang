@@ -58,7 +58,8 @@ func (p *printer) heavyJob(msg string) {
 
 // PrinterProxy is struct
 type PrinterProxy struct {
-	name, real string
+	name string
+	real printer
 }
 
 // NewPrinterProxy func for initializing PrinterProxy
